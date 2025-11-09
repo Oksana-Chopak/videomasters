@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="sv">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>VideoMasterS — videoredigering</title>
+<meta name="color-scheme" content="dark light">
+<style>
+*{box-sizing:border-box}html,body{margin:0;padding:0}
+:root{--bg:#0B1020;--panel:#0F162D;--muted:#94A3B8;--text:#E5E7EB;--brand:#A78BFA;--brand2:#6EE7F9}
+body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,'Inter',sans-serif;color:var(--text);background:#0B1020;line-height:1.55}
+.container{width:min(1120px,92vw);margin:0 auto}
+a{color:inherit;text-decoration:none}
+.button{display:inline-flex;align-items:center;justify-content:center;padding:12px 18px;border-radius:10px;font-weight:600;background:linear-gradient(90deg,var(--brand2),var(--brand));color:#0B1020;border:none;cursor:pointer;box-shadow:0 10px 30px rgba(167,139,250,.25)}
+.header{display:flex;align-items:center;justify-content:space-between;padding:12px 0}
+.brand{display:flex;align-items:center;gap:12px}
+.hero{padding:48px 0 24px}
+h1{font-size:clamp(28px,4.6vw,48px);line-height:1.1;margin:10px 0 14px}
+.sub{color:var(--muted)}
+.section{padding:48px 0}.alt{background:rgba(167,139,250,.05)}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.card{background:var(--panel);border:1px solid rgba(148,163,184,.12);border-radius:14px;overflow:hidden}
+.card .body{padding:12px}.meta{color:var(--muted);font-size:13px}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.form{background:linear-gradient(180deg,rgba(13,23,53,.6),rgba(13,23,53,.3));border:1px solid rgba(148,163,184,.18);border-radius:16px;padding:16px}
+input,textarea,select{width:100%;background:#0F1A3C;color:var(--text);border:1px solid #334155;border-radius:10px;padding:10px 12px;margin-top:6px}
+label{font-weight:600;color:#D1D5DB}
+.small{color:var(--muted);font-size:12px}
+.lightbox{position:fixed;inset:0;display:none}
+.lightbox[open]{display:block}
+.lb-backdrop{position:absolute;inset:0;background:rgba(0,0,0,.65);backdrop-filter:blur(4px)}
+.lb-dialog{position:relative;z-index:2;width:min(1080px,92vw);margin:6vh auto;background:var(--panel);border:1px solid rgba(148,163,184,.25);border-radius:16px;box-shadow:0 30px 80px rgba(0,0,0,.5);padding:12px}
+.lb-media{aspect-ratio:16/9}
+.lb-media iframe,.lb-media video{width:100%;height:100%;display:block}
+.lb-close{position:absolute;top:8px;right:8px;background:rgba(0,0,0,.35);border:1px solid rgba(148,163,184,.3);color:#fff;border-radius:10px;padding:8px 12px;cursor:pointer}
+@media (max-width:900px){.cards{grid-template-columns:1fr 1fr}.grid-2{grid-template-columns:1fr}}
+@media (max-width:600px){.cards{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header class="container header">
+  <div class="brand">
+    <!-- inline logo -->
+    <svg width="120" height="40" viewBox="0 0 640 160" role="img" aria-label="VideoMasterS">
+      <defs><linearGradient id="g1" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%" stop-color="#6EE7F9"/><stop offset="100%" stop-color="#A78BFA"/>
+      </linearGradient></defs>
+      <rect x="0" y="0" width="120" height="120" rx="18" fill="#0F162D" stroke="url(#g1)" stroke-width="6"/>
+      <polygon points="45,36 90,60 45,84" fill="url(#g1)"/>
+      <text x="160" y="50" font-size="40" font-weight="800" fill="url(#g1)">VideoMasterS</text>
+    </svg>
+    <strong style="margin-left:8px">VideoMasterS</strong>
+  </div>
+  <a class="button" href="#contact">Få offert</a>
+</header>
+
+<section class="hero container">
+  <h1>Snabb redigering som säljer: Reels/Shorts, poddklipp, YouTube-videor</h1>
+  <p class="sub">Standardleverans 5 dagar. SV/EN/UK. NDA först.</p>
+</section>
+
+<section id="work" class="section alt">
+  <div class="container">
+    <h2>Utvalda arbeten</h2>
+    <div class="cards">
+      <article class="card">
+        <button class="open-video" data-video="https://www.youtube.com/embed/dQw4w9WgXcQ?rel=0" style="display:block;padding:0;border:0;background:transparent;width:100%">
+          <div style="aspect-ratio:16/9;background:#0F172A"></div>
+        </button>
+        <div class="body"><strong>YouTube: intervju/longform → kapitel</strong><div class="meta">Grafik, lower thirds, kapitel · 5 dagar</div></div>
+      </article>
+      <article class="card">
+        <button class="open-video" data-video="https://www.youtube.com/embed/ysz5S6PUM-U?rel=0" style="display:block;padding:0;border:0;background:transparent;width:100%">
+          <div style="aspect-ratio:16/9;background:#0F172A"></div>
+        </button>
+        <div class="body"><strong>YouTube: produktgenomgång</strong><div class="meta">Grafik, lower thirds, kapitel · 5 dagar</div></div>
+      </article>
+      <article class="card">
+        <button class="open-video" data-video="https://www.youtube.com/embed/9bZkp7q19f0?rel=0" style="display:block;padding:0;border:0;background:transparent;width:100%">
+          <div style="aspect-ratio:16/9;background:#0F172A"></div>
+        </button>
+        <div class="body"><strong>YouTube: event recap 3–5 min</strong><div class="meta">Grafik, lower thirds, kapitel · 5 dagar</div></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container grid-2">
+    <div>
+      <h2>Så här jobbar vi</h2>
+      <ol>
+        <li><strong>Brief & material:</strong> du skickar råmaterial, referenser, brandkit.</li>
+        <li><strong>Scope & offert:</strong> leverabler, format, deadlines bekräftas.</li>
+        <li><strong>Pilot:</strong> 1 provklipp för stil/captions/lower thirds.</li>
+        <li><strong>Produktion:</strong> batch-leverans, 1–2 revisionsrundor.</li>
+        <li><strong>Final & master:</strong> exports i 9:16/1:1/16:9 + SRT.</li>
+      </ol>
+    </div>
+    <div class="form">
+      <h3>Förfrågan om pris & scope</h3>
+      <form id="scope" style="margin-top:10px">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+          <p><label>Namn*<br><input required name="name" placeholder="För- och efternamn"></label></p>
+          <p><label>Email*<br><input required type="email" name="email" placeholder="you@company.com"></label></p>
+        </div>
+        <p><label>Vad ska redigeras?<br><textarea name="what" rows="4" placeholder="Podd 60 min → 10 klipp; YouTube; event aftermovie..."></textarea></label></p>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+          <p><label>Format<br>
+            <select name="format">
+              <option value="9:16">9:16</option><option value="1:1">1:1</option>
+              <option value="16:9">16:9</option><option value="multi">Flera format</option>
+            </select></label></p>
+          <p><label>Längd per video (sek/min)<br><input name="length" placeholder="t.ex. 60 sek / 5 min"></label></p>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+          <p><label>Antal videor per leverans<br><input name="qty" placeholder="t.ex. 10 klipp"></label></p>
+          <p><label>Återkommande?<br>
+            <select name="frequency">
+              <option value="oneoff">Engång</option>
+              <option value="weekly">Varje vecka</option>
+              <option value="monthly">Varje månad</option>
+            </select></label></p>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+          <p><label>Budget (SEK/EUR)<br><input name="budget" placeholder="t.ex. 12 000 SEK / €1000"></label></p>
+          <p><label>Deadline & viktiga datum<br><input name="deadline" placeholder="t.ex. 12 nov / löpande"></label></p>
+        </div>
+        <p><label>Länkar till råmaterial / exempel / brandkit<br><input name="links" placeholder="Drive/Dropbox/WeTransfer..."></label></p>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+          <p><label>Undertexter / språk<br><input name="subs" placeholder="SV / EN / UK (SRT eller burn-in)"></label></p>
+          <p><label><input type="checkbox" name="nda"> NDA krävs</label></p>
+        </div>
+        <button class="button" type="submit">Skicka</button>
+        <div class="small" style="margin-top:6px">GDPR: vi delar inte uppgifterna med tredje part. Svar inom 24 h.</div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<section id="contact" class="section alt">
+  <div class="container grid-2">
+    <div>
+      <h2>Redo att börja?</h2>
+      <p class="sub">Maila oss eller skicka en förfrågan.</p>
+      <p>Email: <a href="mailto:Oksana.chopak@gmail.com">Oksana.chopak@gmail.com</a><br>Instagram: <a href="https://instagram.com/oksana_in_sweden" target="_blank" rel="noopener">@oksana_in_sweden</a></p>
+    </div>
+    <div class="form">
+      <h3>Snabb kontakt</h3>
+      <form id="contact-form">
+        <p><label>Email*<br><input required type="email" name="email" placeholder="you@company.com"></label></p>
+        <p><label>Meddelande<br><textarea name="message" rows="5" placeholder="Reels/Shorts, podd → klipp, YouTube..."></textarea></label></p>
+        <button class="button" type="submit">Skicka</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer class="section container" style="color:#94A3B8">
+  © <span id="year"></span> VideoMasterS · SV/EN/UK · NDA-first · 5 dagar
+</footer>
+
+<div id="lightbox" class="lightbox" aria-hidden="true" role="dialog" aria-modal="true">
+  <div class="lb-backdrop" data-close></div>
+  <div class="lb-dialog" role="document">
+    <button class="lb-close" aria-label="Close" data-close>×</button>
+    <div class="lb-media"></div>
+  </div>
+</div>
+
+<script>
+const lb={el:document.getElementById('lightbox'), media:document.querySelector('.lb-media'), open:false};
+function htmlFor(url){if(/\.mp4(\?|$)/i.test(url)) return `<video src="${url}" controls autoplay playsinline></video>`; return `<iframe src="${url}&autoplay=1" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen frameborder="0"></iframe>`;}
+function openAt(url){lb.el.setAttribute('open','');lb.el.removeAttribute('aria-hidden');document.body.style.overflow='hidden';lb.open=true;lb.media.innerHTML=htmlFor(url);}
+function close(){lb.media.innerHTML='';lb.el.removeAttribute('open');lb.el.setAttribute('aria-hidden','true');document.body.style.overflow='';lb.open=false;}
+document.querySelectorAll('.open-video').forEach(b=>b.addEventListener('click',()=>openAt(b.dataset.video)));
+document.querySelectorAll('[data-close]').forEach(b=>b.addEventListener('click',close));
+document.getElementById('year').textContent=new Date().getFullYear();
+
+function enc(s){return encodeURIComponent(s).replace(/%20/g,'+');}
+document.getElementById('scope').addEventListener('submit',(e)=>{
+  e.preventDefault();const d=new FormData(e.target);
+  const lines=['Scope request (pricing):','Name: '+d.get('name'),'Email: '+d.get('email'),'What: '+(d.get('what')||''),'Format: '+(d.get('format')||''),'Length: '+(d.get('length')||''),'Qty: '+(d.get('qty')||''),'Frequency: '+(d.get('frequency')||''),'Budget: '+(d.get('budget')||''),'Deadline: '+(d.get('deadline')||''),'Links: '+(d.get('links')||''),'Subtitles: '+(d.get('subs')||''),'NDA: '+(d.get('nda')?'Yes':'No')].join('\n');
+  window.location.href=`mailto:Oksana.chopak@gmail.com?subject=${enc('Scope request — VideoMasterS')}&body=${enc(lines)}`;
+});
+document.getElementById('contact-form').addEventListener('submit',(e)=>{
+  e.preventDefault();const d=new FormData(e.target);
+  const body=`Email: ${d.get('email')}\nMessage:\n${(d.get('message')||'').slice(0,2000)}`;
+  window.location.href=`mailto:Oksana.chopak@gmail.com?subject=${enc('Quick contact — VideoMasterS')}&body=${enc(body)}`;
+});
+</script>
+</body>
+</html>
