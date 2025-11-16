@@ -32,9 +32,9 @@ h1{font-size:clamp(28px,4.6vw,48px);line-height:1.1;margin:10px 0 14px}
 .card .body{padding:12px}.meta{color:var(--muted);font-size:13px}
 .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:20px}
 .form{background:linear-gradient(180deg,rgba(13,23,53,.6),rgba(13,23,53,.3));border:1px solid rgba(148,163,184,.18);border-radius:16px;padding:16px}
-input,textarea,select{width:100%;background:#0F1A3C;color:var(--text);border:1px solid #334155;border-radius:10px;padding:10px 12px;margin-top:6px}
-label{font-weight:600;color:#D1D5DB}
 .small{color:var(--muted);font-size:12px}
+
+/* Lightbox */
 .lightbox{position:fixed;inset:0;display:none}
 .lightbox[open]{display:block}
 .lb-backdrop{position:absolute;inset:0;background:rgba(0,0,0,.65);backdrop-filter:blur(4px)}
@@ -42,8 +42,20 @@ label{font-weight:600;color:#D1D5DB}
 .lb-media{aspect-ratio:16/9}
 .lb-media iframe{width:100%;height:100%;display:block;border:0}
 .lb-close{position:absolute;top:8px;right:8px;background:rgba(0,0,0,.35);border:1px solid rgba(148,163,184,.3);color:#fff;border-radius:10px;padding:8px 12px;cursor:pointer}
+
 @media (max-width:900px){.cards{grid-template-columns:1fr 1fr}.grid-2{grid-template-columns:1fr}}
 @media (max-width:600px){.cards{grid-template-columns:1fr}}
+/* --- HubSpot form dark theme --- */
+.hs-form input[type=text], .hs-form input[type=email], .hs-form input[type=tel],
+.hs-form textarea, .hs-form select{
+  width:100%; background:#0F1A3C !important; color:#E5E7EB !important;
+  border:1px solid #334155 !important; border-radius:10px !important; padding:10px 12px !important;
+}
+.hs-form label{ color:#D1D5DB !important; font-weight:600 !important; }
+.hs-button.primary, .hs-form .actions input[type=submit]{
+  background:linear-gradient(90deg,#6EE7F9,#A78BFA) !important; color:#0B1020 !important;
+  border:none !important; border-radius:10px !important; padding:12px 18px !important; font-weight:600 !important; cursor:pointer !important;
+}
 </style>
 </head>
 <body>
@@ -92,43 +104,15 @@ label{font-weight:600;color:#D1D5DB}
         <li><strong>Final & master:</strong> exports i 9:16/1:1/16:9 + SRT.</li>
       </ol>
     </div>
+
+    <!-- HubSpot форма (спрощена interesseanmälan) -->
     <div class="form">
-      <h3 id="form_title">Förfrågan om pris & scope</h3>
-      <form id="scope" style="margin-top:10px">
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
-          <p><label id="lbl_name">Namn*<br><input required name="name" placeholder="För- och efternamn"></label></p>
-          <p><label id="lbl_email">Email*<br><input required type="email" name="email" placeholder="you@company.com"></label></p>
-        </div>
-        <p><label id="lbl_what">Vad ska redigeras?<br><textarea name="what" rows="4" placeholder="Podd 60 min → 10 klipp; YouTube; event aftermovie..."></textarea></label></p>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
-          <p><label id="lbl_format">Format<br>
-            <select name="format">
-              <option value="9:16">9:16</option><option value="1:1">1:1</option>
-              <option value="16:9">16:9</option><option value="multi">Flera format</option>
-            </select></label></p>
-          <p><label id="lbl_length">Längd per video (sek/min)<br><input name="length" placeholder="t.ex. 60 sek / 5 min"></label></p>
-        </div>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
-          <p><label id="lbl_qty">Antal videor per leverans<br><input name="qty" placeholder="t.ex. 10 klipp"></label></p>
-          <p><label id="lbl_frequency">Återkommande?<br>
-            <select name="frequency">
-              <option value="oneoff">Engång</option>
-              <option value="weekly">Varje vecka</option>
-              <option value="monthly">Varje månad</option>
-            </select></label></p>
-        </div>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
-          <p><label id="lbl_budget">Budget (SEK/EUR)<br><input name="budget" placeholder="t.ex. 12 000 SEK / €1000"></label></p>
-          <p><label id="lbl_deadline">Deadline & viktiga datum<br><input name="deadline" placeholder="t.ex. 12 nov / löpande"></label></p>
-        </div>
-        <p><label id="lbl_links">Länkar till råmaterial / exempel / brandkit<br><input name="links" placeholder="Drive/Dropbox/WeTransfer..."></label></p>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
-          <p><label id="lbl_subs">Undertexter / språk<br><input name="subs" placeholder="SV / EN / UK (SRT eller burn-in)"></label></p>
-          <p><label><input type="checkbox" name="nda"> <span id="lbl_nda">NDA krävs</span></label></p>
-        </div>
-        <button class="button" type="submit" id="btn_send">Skicka</button>
-        <div class="small" style="margin-top:6px" id="gdpr_note">GDPR: vi delar inte uppgifterna med tredje part. Svar inom 24 h.</div>
-      </form>
+      <h3 id="form_title">Förfrågan (interesseanmälan)</h3>
+      <div class="hs-form-frame"
+           data-region="eu1"
+           data-form-id="89cc8789-9a20-482b-9fab-e2950c3eb4ed"
+           data-portal-id="147263418"></div>
+      <div class="small" style="margin-top:6px">GDPR: vi delar inte uppgifterna med tredje part.</div>
     </div>
   </div>
 </section>
@@ -138,15 +122,12 @@ label{font-weight:600;color:#D1D5DB}
     <div>
       <h2 id="contact_title">Redo att börja?</h2>
       <p class="sub" id="contact_sub">Maila oss eller skicka en förfrågan.</p>
-      <p>Email: <a href="mailto:Oksana.chopak@gmail.com">Oksana.chopak@gmail.com</a><br>Instagram: <a href="https://instagram.com/oksana_in_sweden" target="_blank" rel="noopener">@oksana_in_sweden</a></p>
+      <p>Email: <a href="mailto:Oksana.chopak@gmail.com">Oksana.chopak@gmail.com</a><br>
+         Instagram: <a href="https://instagram.com/oksana_in_sweden" target="_blank" rel="noopener">@oksana_in_sweden</a></p>
     </div>
     <div class="form">
       <h3 id="quick_title">Snabb kontakt</h3>
-      <form id="contact-form">
-        <p><label id="quick_email">Email*<br><input required type="email" name="email" placeholder="you@company.com"></label></p>
-        <p><label id="quick_msg">Meddelande<br><textarea name="message" rows="5" placeholder="Reels/Shorts, podd → klipp, YouTube..."></textarea></label></p>
-        <button class="button" type="submit" id="btn_quick_send">Skicka</button>
-      </form>
+      <p class="small">Använd formuläret ovan – för snabba frågor skriv helst på Instagram eller e-post.</p>
     </div>
   </div>
 </section>
@@ -164,6 +145,9 @@ label{font-weight:600;color:#D1D5DB}
   </div>
 </div>
 
+<!-- HubSpot embed (один раз на сторінку) -->
+<script src="https://js-eu1.hsforms.net/forms/embed/147263418.js" defer></script>
+
 <script>
 /* --- Lightbox --- */
 const lb={el:document.getElementById('lightbox'), media:document.querySelector('.lb-media'), open:false};
@@ -172,21 +156,7 @@ function openAt(url){ lb.el.setAttribute('open',''); lb.el.removeAttribute('aria
 function close(){ lb.media.innerHTML=''; lb.el.removeAttribute('open'); lb.el.setAttribute('aria-hidden','true'); document.body.style.overflow=''; lb.open=false; }
 document.querySelectorAll('[data-close]').forEach(b=>b.addEventListener('click',close));
 
-/* --- Mailto forms --- */
-function enc(s){return encodeURIComponent(s).replace(/%20/g,'+');}
-document.getElementById('scope').addEventListener('submit',(e)=>{
-  e.preventDefault();const d=new FormData(e.target);
-  const lines=['Scope request (pricing):','Name: '+d.get('name'),'Email: '+d.get('email'),'What: '+(d.get('what')||''),'Format: '+(d.get('format')||''),'Length: '+(d.get('length')||''),'Qty: '+(d.get('qty')||''),'Frequency: '+(d.get('frequency')||''),'Budget: '+(d.get('budget')||''),'Deadline: '+(d.get('deadline')||''),'Links: '+(d.get('links')||''),'Subtitles: '+(d.get('subs')||''),'NDA: '+(d.get('nda')?'Yes':'No')].join('\\n');
-  window.location.href=`mailto:Oksana.chopak@gmail.com?subject=${enc('Scope request — VideoMasterS')}&body=${enc(lines)}`;
-});
-document.getElementById('contact-form').addEventListener('submit',(e)=>{
-  e.preventDefault();const d=new FormData(e.target);
-  const body=`Email: ${d.get('email')}\\nMessage:\\n${(d.get('message')||'').slice(0,2000)}`;
-  window.location.href=`mailto:Oksana.chopak@gmail.com?subject=${enc('Quick contact — VideoMasterS')}&body=${enc(body)}`;
-});
-document.getElementById('year').textContent=new Date().getFullYear();
-
-/* --- Portfolio: твої Google Drive відео --- */
+/* --- Portfolio: Google Drive відео --- */
 const gPreview = id => `https://drive.google.com/file/d/${id}/preview`;
 const gThumb   = id => `https://drive.google.com/thumbnail?id=${id}&sz=w1280`;
 
@@ -265,53 +235,26 @@ tabsEl.addEventListener('click', (e)=>{
 });
 renderTabs(); renderGrids();
 
-/* --- I18N (SV/EN/UK) --- */
+/* --- I18N (SV/EN/UK) — форма лишається шведською, перекладаємо тексти сайту --- */
 const T={
-  sv:{
-    hero_title:'Snabb redigering som säljer: Reels/Shorts, poddklipp, YouTube-videor',
-    hero_sub:'Standardleverans 5 dagar. SV/EN/UK. NDA först.',
-    cta_get_quote:'Få offert',
-    work_title:'Portfolio',
-    flow_title:'Så här jobbar vi',
-    form_title:'Förfrågan om pris & scope',
-    lbl_name:'Namn*', lbl_email:'Email*', lbl_what:'Vad ska redigeras?', lbl_format:'Format',
-    lbl_length:'Längd per video (sek/min)', lbl_qty:'Antal videor per leverans', lbl_frequency:'Återkommande?',
-    lbl_budget:'Budget (SEK/EUR)', lbl_deadline:'Deadline & viktiga datum', lbl_links:'Länkar till råmaterial / exempel / brandkit',
-    lbl_subs:'Undertexter / språk', lbl_nda:'NDA krävs', btn_send:'Skicka',
-    gdpr_note:'GDPR: vi delar inte uppgifterna med tredje part. Svar inom 24 h.',
-    contact_title:'Redo att börja?', contact_sub:'Maila oss eller skicka en förfrågan.',
-    quick_title:'Snabb kontakt', quick_email:'Email*', quick_msg:'Meddelande', btn_quick_send:'Skicka'
-  },
-  en:{
-    hero_title:'Fast edits that sell: Reels/Shorts, podcast clips, YouTube videos',
-    hero_sub:'Standard turnaround 5 days. SV/EN/UK. NDA-first.',
-    cta_get_quote:'Get a quote',
-    work_title:'Portfolio',
-    flow_title:'How we work',
-    form_title:'Request pricing & scope',
-    lbl_name:'Name*', lbl_email:'Email*', lbl_what:'What needs editing?', lbl_format:'Format',
-    lbl_length:'Length per video (sec/min)', lbl_qty:'Videos per batch', lbl_frequency:'Recurring?',
-    lbl_budget:'Budget (SEK/EUR)', lbl_deadline:'Deadline & key dates', lbl_links:'Links to raw/exemplars/brand kit',
-    lbl_subs:'Subtitles / languages', lbl_nda:'NDA required', btn_send:'Send',
-    gdpr_note:'GDPR: we don’t share data with third parties. Reply within 24h.',
-    contact_title:'Ready to start?', contact_sub:'Email us or send a request.',
-    quick_title:'Quick contact', quick_email:'Email*', quick_msg:'Message', btn_quick_send:'Send'
-  },
-  uk:{
-    hero_title:'Швидкий відеомонтаж: Reels/Shorts, подкаст-кліпи, YouTube-відео',
-    hero_sub:'Стандартний дедлайн 5 днів. SV/EN/UK. Спершу NDA.',
-    cta_get_quote:'Отримати кошторис',
-    work_title:'Портфоліо',
-    flow_title:'Як ми працюємо',
-    form_title:'Запит вартості та обсягу',
-    lbl_name:'Ім’я*', lbl_email:'Email*', lbl_what:'Що саме потрібно змонтувати?', lbl_format:'Формат',
-    lbl_length:'Тривалість відео (сек/хв)', lbl_qty:'Кількість відео в партії', lbl_frequency:'Регулярність?',
-    lbl_budget:'Бюджет (SEK/EUR)', lbl_deadline:'Дедлайн та ключові дати', lbl_links:'Посилання на сирий матеріал / приклади / бренд-кіт',
-    lbl_subs:'Субтитри / мови', lbl_nda:'Потрібен NDA', btn_send:'Надіслати',
-    gdpr_note:'GDPR: не передаємо дані третім сторонам. Відповідь протягом 24 годин.',
-    contact_title:'Готові почати?', contact_sub:'Напишіть нам або надішліть запит.',
-    quick_title:'Швидкий контакт', quick_email:'Email*', quick_msg:'Повідомлення', btn_quick_send:'Надіслати'
-  }
+  sv:{hero_title:'Snabb redigering som säljer: Reels/Shorts, poddklipp, YouTube-videor',
+      hero_sub:'Standardleverans 5 dagar. SV/EN/UK. NDA först.', cta_get_quote:'Få offert',
+      work_title:'Portfolio', flow_title:'Så här jobbar vi',
+      form_title:'Förfrågan (interesseanmälan)',
+      contact_title:'Redo att börja?', contact_sub:'Maila oss eller skicka en förfrågan.',
+      quick_title:'Snabb kontakt'},
+  en:{hero_title:'Fast edits that sell: Reels/Shorts, podcast clips, YouTube videos',
+      hero_sub:'Standard turnaround 5 days. SV/EN/UK. NDA-first.', cta_get_quote:'Get a quote',
+      work_title:'Portfolio', flow_title:'How we work',
+      form_title:'Request (expression of interest)',
+      contact_title:'Ready to start?', contact_sub:'Email us or send a request.',
+      quick_title:'Quick contact'},
+  uk:{hero_title:'Швидкий відеомонтаж: Reels/Shorts, подкаст-кліпи, YouTube-відео',
+      hero_sub:'Стандартний дедлайн 5 днів. SV/EN/UK. Спершу NDA.', cta_get_quote:'Отримати кошторис',
+      work_title:'Портфоліо', flow_title:'Як ми працюємо',
+      form_title:'Запит (первинна заявка)',
+      contact_title:'Готові почати?', contact_sub:'Напишіть нам або надішліть запит.',
+      quick_title:'Швидкий контакт'}
 };
 function applyLang(lang){
   const t=T[lang]; if(!t) return;
@@ -321,26 +264,9 @@ function applyLang(lang){
   document.getElementById('work_title').textContent=t.work_title;
   document.getElementById('flow_title').textContent=t.flow_title;
   document.getElementById('form_title').textContent=t.form_title;
-  document.getElementById('lbl_name').childNodes[0].nodeValue=t.lbl_name;
-  document.getElementById('lbl_email').childNodes[0].nodeValue=t.lbl_email;
-  document.getElementById('lbl_what').childNodes[0].nodeValue=t.lbl_what;
-  document.getElementById('lbl_format').childNodes[0].nodeValue=t.lbl_format;
-  document.getElementById('lbl_length').childNodes[0].nodeValue=t.lbl_length;
-  document.getElementById('lbl_qty').childNodes[0].nodeValue=t.lbl_qty;
-  document.getElementById('lbl_frequency').childNodes[0].nodeValue=t.lbl_frequency;
-  document.getElementById('lbl_budget').childNodes[0].nodeValue=t.lbl_budget;
-  document.getElementById('lbl_deadline').childNodes[0].nodeValue=t.lbl_deadline;
-  document.getElementById('lbl_links').childNodes[0].nodeValue=t.lbl_links;
-  document.getElementById('lbl_subs').childNodes[0].nodeValue=t.lbl_subs;
-  document.getElementById('lbl_nda').textContent=t.lbl_nda;
-  document.getElementById('btn_send').textContent=t.btn_send;
-  document.getElementById('gdpr_note').textContent=t.gdpr_note;
   document.getElementById('contact_title').textContent=t.contact_title;
   document.getElementById('contact_sub').textContent=t.contact_sub;
   document.getElementById('quick_title').textContent=t.quick_title;
-  document.getElementById('quick_email').childNodes[0].nodeValue=t.quick_email;
-  document.getElementById('quick_msg').childNodes[0].nodeValue=t.quick_msg;
-  document.getElementById('btn_quick_send').textContent=t.btn_quick_send;
   document.documentElement.lang=lang;
   [...document.querySelectorAll('#langbar button')].forEach(b=>b.classList.toggle('active', b.dataset.lang===lang));
 }
@@ -348,6 +274,8 @@ document.getElementById('langbar').addEventListener('click',(e)=>{
   if(e.target.matches('button[data-lang]')) applyLang(e.target.dataset.lang);
 });
 applyLang('sv');
+
+document.getElementById('year').textContent=new Date().getFullYear();
 </script>
 </body>
 </html>
