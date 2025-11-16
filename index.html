@@ -47,53 +47,6 @@ h1{font-size:clamp(28px,4.6vw,48px);line-height:1.1;margin:10px 0 14px}
 
 @media (max-width:900px){.cards{grid-template-columns:1fr 1fr}.grid-2{grid-template-columns:1fr}}
 @media (max-width:600px){.cards{grid-template-columns:1fr}}
-
-/* --- HubSpot form: суворі перекриття кольорів для темної теми --- */
-.hs-form, .hs-form *{text-shadow:none !important}
-.hs-form label,
-.hs-form legend,
-.hs-form .hs-field-desc,
-.hs-form .hs-richtext,
-.hs-form .inputs-list label,
-.hs-form .field>label span,
-.hs-form .hs-error-msg{
-  color:var(--textStrong) !important;
-  opacity:1 !important;
-}
-.hs-form .hs-form-field label span,
-.hs-form .hs-form-field label{
-  color:var(--textStrong) !important;
-  opacity:1 !important;
-}
-.hs-form .hs-input{
-  background:#0F1A3C !important;
-  color:var(--text) !important;
-  border:1px solid #334155 !important;
-  border-radius:10px !important;
-  padding:10px 12px !important;
-}
-.hs-form input[type=text]::placeholder,
-.hs-form input[type=email]::placeholder,
-.hs-form input[type=tel]::placeholder,
-.hs-form textarea::placeholder{color:var(--textMid) !important; opacity:1}
-.hs-form input[type=text]::-webkit-input-placeholder,
-.hs-form input[type=email]::-webkit-input-placeholder,
-.hs-form input[type=tel]::-webkit-input-placeholder,
-.hs-form textarea::-webkit-input-placeholder{color:var(--textMid) !important; opacity:1}
-.hs-form input[type=text]:-ms-input-placeholder,
-.hs-form input[type=email]:-ms-input-placeholder,
-.hs-form input[type=tel]:-ms-input-placeholder,
-.hs-form textarea:-ms-input-placeholder{color:var(--textMid) !important}
-.hs-form .hs-form-required{color:#FCA5A5 !important} /* червона зірочка, але контрастна */
-.hs-button.primary, .hs-form .actions input[type=submit]{
-  background:linear-gradient(90deg,var(--brand2),var(--brand)) !important;
-  color:#0B1020 !important;
-  border:none !important;
-  border-radius:10px !important;
-  padding:12px 18px !important;
-  font-weight:700 !important;
-  cursor:pointer !important;
-}
 </style>
 </head>
 <body>
@@ -143,13 +96,10 @@ h1{font-size:clamp(28px,4.6vw,48px);line-height:1.1;margin:10px 0 14px}
       </ol>
     </div>
 
-    <!-- HubSpot форма (спрощена interesseanmälan) -->
+    <!-- HubSpot форма -->
     <div class="form">
       <h3 id="form_title">Förfrågan (interesseanmälan)</h3>
-      <div class="hs-form-frame"
-           data-region="eu1"
-           data-form-id="89cc8789-9a20-482b-9fab-e2950c3eb4ed"
-           data-portal-id="147263418"></div>
+      <div id="hs-form"></div>
       <div class="small" style="margin-top:6px">GDPR: vi delar inte uppgifterna med tredje part.</div>
     </div>
   </div>
@@ -183,8 +133,8 @@ h1{font-size:clamp(28px,4.6vw,48px);line-height:1.1;margin:10px 0 14px}
   </div>
 </div>
 
-<!-- HubSpot embed (один раз на сторінку) -->
-<script src="https://js-eu1.hsforms.net/forms/embed/147263418.js" defer></script>
+<!-- HubSpot Forms v2 (EU) -->
+<script src="https://js-eu1.hsforms.net/forms/embed/v2.js" defer></script>
 
 <script>
 /* --- Lightbox --- */
@@ -197,7 +147,6 @@ document.querySelectorAll('[data-close]').forEach(b=>b.addEventListener('click',
 /* --- Portfolio: Google Drive відео --- */
 const gPreview = id => `https://drive.google.com/file/d/${id}/preview`;
 const gThumb   = id => `https://drive.google.com/thumbnail?id=${id}&sz=w1280`;
-
 const WORK = {
   "Shorts / Reels / TikToks": [
     {id:"1WhvvMwmEphIdQPUfj4-jLNyvFe4uSDqs", title:"Shorts/Reels #1"},
@@ -235,12 +184,10 @@ const WORK = {
     {id:"185-NBKm6VR_RwHnojP94DM1CBx_XxKvv", title:"Industrial #3"}
   ]
 };
-
 const tabsEl = document.getElementById('tabs');
 const gridsRoot = document.getElementById('grids');
 const catNames = Object.keys(WORK);
 let active = catNames[0];
-
 function cardHTML(item){
   const thumb = gThumb(item.id);
   const url   = gPreview(item.id);
@@ -273,7 +220,7 @@ tabsEl.addEventListener('click', (e)=>{
 });
 renderTabs(); renderGrids();
 
-/* --- I18N (SV/EN/UK) — форма лишається шведською, перекладаємо тексти сайту --- */
+/* --- I18N (SV/EN/UK) --- */
 const T={
   sv:{hero_title:'Snabb redigering som säljer: Reels/Shorts, poddklipp, YouTube-videor',
       hero_sub:'Standardleverans 5 dagar. SV/EN/UK. NDA först.', cta_get_quote:'Få offert',
@@ -314,6 +261,54 @@ document.getElementById('langbar').addEventListener('click',(e)=>{
 applyLang('sv');
 
 document.getElementById('year').textContent=new Date().getFullYear();
+
+/* --- HubSpot: програмне створення + інʼєкція стилів у iframe --- */
+(function initHubspot(){
+  function injectHsCss(){
+    const ifr = document.querySelector('iframe.hs-form-iframe');
+    if(!ifr) { setTimeout(injectHsCss, 150); return; }
+    try{
+      const doc = ifr.contentWindow.document;
+      const style = doc.createElement('style');
+      style.innerHTML = `
+        :root{color-scheme:dark}
+        body, .hs-form, .hs-form *{text-shadow:none !important}
+        .hs-form label,
+        .hs-form legend,
+        .hs-form .hs-field-desc,
+        .hs-form .hs-richtext,
+        .hs-form .inputs-list label,
+        .hs-error-msg{
+          color:#F8FAFC !important; opacity:1 !important;
+        }
+        .hs-form .hs-form-field label span{ color:#F8FAFC !important; opacity:1 !important; }
+        .hs-form .hs-input{
+          background:#0F1A3C !important; color:#E5E7EB !important;
+          border:1px solid #334155 !important; border-radius:10px !important; padding:10px 12px !important;
+        }
+        .hs-form input::placeholder, .hs-form textarea::placeholder{ color:#E2E8F0 !important; opacity:1 }
+        .hs-form .hs-form-required{ color:#FCA5A5 !important }
+        .hs-button.primary, .hs-form .actions input[type=submit]{
+          background:linear-gradient(90deg,#6EE7F9,#A78BFA) !important; color:#0B1020 !important;
+          border:none !important; border-radius:10px !important; padding:12px 18px !important; font-weight:700 !important;
+        }
+      `;
+      doc.head.appendChild(style);
+    }catch(e){ /* якщо кросдомен — повторимо */ setTimeout(injectHsCss, 300); }
+  }
+
+  function createHsForm(){
+    if(!(window.hbspt && window.hbspt.forms)) { setTimeout(createHsForm, 200); return; }
+    window.hbspt.forms.create({
+      region: "eu1",
+      portalId: "147263418",
+      formId: "89cc8789-9a20-482b-9fab-e2950c3eb4ed",
+      target: "#hs-form",
+      onFormReady: function(){ injectHsCss(); }
+    });
+  }
+  createHsForm();
+})();
 </script>
 </body>
 </html>
