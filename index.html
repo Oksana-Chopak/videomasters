@@ -8,7 +8,7 @@
 <meta name="color-scheme" content="dark light">
 <style>
 *{box-sizing:border-box}html,body{margin:0;padding:0}
-:root{--bg:#0B1020;--panel:#0F162D;--muted:#94A3B8;--text:#E5E7EB;--brand:#A78BFA;--brand2:#6EE7F9}
+:root{--bg:#0B1020;--panel:#0F162D;--muted:#94A3B8;--text:#E5E7EB;--textStrong:#F8FAFC;--textMid:#E2E8F0;--brand:#A78BFA;--brand2:#6EE7F9}
 body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,'Inter',sans-serif;color:var(--text);background:#0B1020;line-height:1.55}
 .container{width:min(1120px,92vw);margin:0 auto}
 a{color:inherit;text-decoration:none}
@@ -16,7 +16,7 @@ a{color:inherit;text-decoration:none}
 .header{display:flex;align-items:center;justify-content:space-between;padding:12px 0}
 .brand{display:flex;align-items:center;gap:12px}
 .lang{display:flex;gap:8px;align-items:center;margin-left:16px}
-.lang button{background:#0F1A3C;border:1px solid #334155;border-radius:999px;padding:6px 10px;color:#E5E7EB;cursor:pointer}
+.lang button{background:#132042;border:1px solid #3b4a67;border-radius:999px;padding:6px 10px;color:#F1F5F9;cursor:pointer;font-weight:600}
 .lang button.active{background:linear-gradient(90deg,var(--brand2),var(--brand));color:#0B1020;border-color:transparent}
 .hero{padding:48px 0 24px}
 h1{font-size:clamp(28px,4.6vw,48px);line-height:1.1;margin:10px 0 14px}
@@ -24,16 +24,17 @@ h1{font-size:clamp(28px,4.6vw,48px);line-height:1.1;margin:10px 0 14px}
 .section{padding:48px 0}
 .alt{background:rgba(167,139,250,.05)}
 .tabs{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0 14px}
-.tab{padding:8px 12px;border-radius:999px;border:1px solid #334155;background:#0F1A3C;cursor:pointer;color:#E5E7EB;font-weight:600} /* світліший текст на табах */
+.tab{padding:8px 12px;border-radius:999px;border:1px solid #3b4a67;background:#132042;cursor:pointer;color:#F1F5F9;font-weight:700}
 .tab.active{border-color:transparent;background:linear-gradient(90deg,var(--brand2),var(--brand));color:#0B1020}
 .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
 .card{background:var(--panel);border:1px solid rgba(148,163,184,.12);border-radius:14px;overflow:hidden}
 .thumb{aspect-ratio:16/9;width:100%;display:block;background:#0F172A;object-fit:cover}
 .card .body{padding:12px}
-.meta{color:#CBD5E1;font-size:13px} /* світліший підпис під картками */
+.card .body strong{color:var(--textMid)}
+.meta{color:#E2E8F0;font-size:13px}
 .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:20px}
 .form{background:linear-gradient(180deg,rgba(13,23,53,.6),rgba(13,23,53,.3));border:1px solid rgba(148,163,184,.18);border-radius:16px;padding:16px}
-.small{color:#CBD5E1} /* світліше дрібне пояснення */
+.small{color:#E2E8F0}
 
 /* Lightbox */
 .lightbox{position:fixed;inset:0;display:none}
@@ -47,20 +48,51 @@ h1{font-size:clamp(28px,4.6vw,48px);line-height:1.1;margin:10px 0 14px}
 @media (max-width:900px){.cards{grid-template-columns:1fr 1fr}.grid-2{grid-template-columns:1fr}}
 @media (max-width:600px){.cards{grid-template-columns:1fr}}
 
-/* --- HubSpot form dark theme (посвітлішені тексти) --- */
-.hs-form label, .hs-form legend, .hs-richtext, .hs-form .hs-field-desc, .hs-error-msg{
-  color:#F3F4F6 !important; /* майже білий */
-  font-weight:600 !important;
+/* --- HubSpot form: суворі перекриття кольорів для темної теми --- */
+.hs-form, .hs-form *{text-shadow:none !important}
+.hs-form label,
+.hs-form legend,
+.hs-form .hs-field-desc,
+.hs-form .hs-richtext,
+.hs-form .inputs-list label,
+.hs-form .field>label span,
+.hs-form .hs-error-msg{
+  color:var(--textStrong) !important;
+  opacity:1 !important;
 }
-.hs-form input[type=text], .hs-form input[type=email], .hs-form input[type=tel],
-.hs-form textarea, .hs-form select{
-  width:100%; background:#0F1A3C !important; color:#E5E7EB !important;
-  border:1px solid #334155 !important; border-radius:10px !important; padding:10px 12px !important;
+.hs-form .hs-form-field label span,
+.hs-form .hs-form-field label{
+  color:var(--textStrong) !important;
+  opacity:1 !important;
 }
-.hs-form input::placeholder, .hs-form textarea::placeholder{ color:#E2E8F0 !important; opacity:1 }
+.hs-form .hs-input{
+  background:#0F1A3C !important;
+  color:var(--text) !important;
+  border:1px solid #334155 !important;
+  border-radius:10px !important;
+  padding:10px 12px !important;
+}
+.hs-form input[type=text]::placeholder,
+.hs-form input[type=email]::placeholder,
+.hs-form input[type=tel]::placeholder,
+.hs-form textarea::placeholder{color:var(--textMid) !important; opacity:1}
+.hs-form input[type=text]::-webkit-input-placeholder,
+.hs-form input[type=email]::-webkit-input-placeholder,
+.hs-form input[type=tel]::-webkit-input-placeholder,
+.hs-form textarea::-webkit-input-placeholder{color:var(--textMid) !important; opacity:1}
+.hs-form input[type=text]:-ms-input-placeholder,
+.hs-form input[type=email]:-ms-input-placeholder,
+.hs-form input[type=tel]:-ms-input-placeholder,
+.hs-form textarea:-ms-input-placeholder{color:var(--textMid) !important}
+.hs-form .hs-form-required{color:#FCA5A5 !important} /* червона зірочка, але контрастна */
 .hs-button.primary, .hs-form .actions input[type=submit]{
-  background:linear-gradient(90deg,#6EE7F9,#A78BFA) !important; color:#0B1020 !important;
-  border:none !important; border-radius:10px !important; padding:12px 18px !important; font-weight:600 !important; cursor:pointer !important;
+  background:linear-gradient(90deg,var(--brand2),var(--brand)) !important;
+  color:#0B1020 !important;
+  border:none !important;
+  border-radius:10px !important;
+  padding:12px 18px !important;
+  font-weight:700 !important;
+  cursor:pointer !important;
 }
 </style>
 </head>
