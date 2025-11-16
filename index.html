@@ -24,15 +24,16 @@ h1{font-size:clamp(28px,4.6vw,48px);line-height:1.1;margin:10px 0 14px}
 .section{padding:48px 0}
 .alt{background:rgba(167,139,250,.05)}
 .tabs{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0 14px}
-.tab{padding:8px 12px;border-radius:999px;border:1px solid #334155;background:#0F1A3C;cursor:pointer}
+.tab{padding:8px 12px;border-radius:999px;border:1px solid #334155;background:#0F1A3C;cursor:pointer;color:#E5E7EB;font-weight:600} /* світліший текст на табах */
 .tab.active{border-color:transparent;background:linear-gradient(90deg,var(--brand2),var(--brand));color:#0B1020}
 .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
 .card{background:var(--panel);border:1px solid rgba(148,163,184,.12);border-radius:14px;overflow:hidden}
 .thumb{aspect-ratio:16/9;width:100%;display:block;background:#0F172A;object-fit:cover}
-.card .body{padding:12px}.meta{color:var(--muted);font-size:13px}
+.card .body{padding:12px}
+.meta{color:#CBD5E1;font-size:13px} /* світліший підпис під картками */
 .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:20px}
 .form{background:linear-gradient(180deg,rgba(13,23,53,.6),rgba(13,23,53,.3));border:1px solid rgba(148,163,184,.18);border-radius:16px;padding:16px}
-.small{color:var(--muted);font-size:12px}
+.small{color:#CBD5E1} /* світліше дрібне пояснення */
 
 /* Lightbox */
 .lightbox{position:fixed;inset:0;display:none}
@@ -45,13 +46,18 @@ h1{font-size:clamp(28px,4.6vw,48px);line-height:1.1;margin:10px 0 14px}
 
 @media (max-width:900px){.cards{grid-template-columns:1fr 1fr}.grid-2{grid-template-columns:1fr}}
 @media (max-width:600px){.cards{grid-template-columns:1fr}}
-/* --- HubSpot form dark theme --- */
+
+/* --- HubSpot form dark theme (посвітлішені тексти) --- */
+.hs-form label, .hs-form legend, .hs-richtext, .hs-form .hs-field-desc, .hs-error-msg{
+  color:#F3F4F6 !important; /* майже білий */
+  font-weight:600 !important;
+}
 .hs-form input[type=text], .hs-form input[type=email], .hs-form input[type=tel],
 .hs-form textarea, .hs-form select{
   width:100%; background:#0F1A3C !important; color:#E5E7EB !important;
   border:1px solid #334155 !important; border-radius:10px !important; padding:10px 12px !important;
 }
-.hs-form label{ color:#D1D5DB !important; font-weight:600 !important; }
+.hs-form input::placeholder, .hs-form textarea::placeholder{ color:#E2E8F0 !important; opacity:1 }
 .hs-button.primary, .hs-form .actions input[type=submit]{
   background:linear-gradient(90deg,#6EE7F9,#A78BFA) !important; color:#0B1020 !important;
   border:none !important; border-radius:10px !important; padding:12px 18px !important; font-weight:600 !important; cursor:pointer !important;
